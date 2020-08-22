@@ -1,6 +1,8 @@
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler
+import numpy as np
+import pandas as pd
 
 # All sklearn Transforms must have the `transform` and `fit` methods
 class DropColumns(BaseEstimator, TransformerMixin):
@@ -21,10 +23,14 @@ class ImputarMediana(BaseEstimator, TransformerMixin):
         self.columns = columns
 
     def fit(self, X, y=None):
+        import numpy as np
+        import pandas as pd
         return self
     
     def transform(self, X):
         # Primero copiamos el dataframe de datos de entrada 'X'
+        import numpy as np
+        import pandas as pd
         data = X.copy()
         numeric_columns = data.select_dtypes(exclude='object').columns
         
