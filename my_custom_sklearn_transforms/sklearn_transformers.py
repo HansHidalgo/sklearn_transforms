@@ -28,15 +28,9 @@ class ImputarMediana(BaseEstimator, TransformerMixin):
         data = X.copy()
         numeric_columns = data.select_dtypes(exclude='object').columns
         
-        from sklearn.impute import SimpleImputer
-        s2 = SimpleImputer(
-            #missing_values=np.nan,  # los valores que faltan son del tipo ``np.nan`` (Pandas estándar)
-            strategy='median',  # la estrategia elegida es cambiar el valor faltante por una constante
-            #fill_value=0,  # la constante que se usará para completar los valores faltantes es un int64 = 0
-            verbose=0,
-            copy=True
-        )
-        data[numeric_columns] = s2.fit_transform(data[numeric_columns])
+        for columna in numeric_columns:
+            mediana = data[columna].dropna().median()
+            data[columna].fillna(mediana,inplace=True)
         return data
     
 class Estandar_Data(BaseEstimator, TransformerMixin):
