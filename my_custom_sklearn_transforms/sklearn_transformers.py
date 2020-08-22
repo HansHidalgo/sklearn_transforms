@@ -1,6 +1,7 @@
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler
+import numpy as np
 
 # All sklearn Transforms must have the `transform` and `fit` methods
 class DropColumns(BaseEstimator, TransformerMixin):
@@ -29,6 +30,7 @@ class ImputarMediana(BaseEstimator, TransformerMixin):
         numeric_columns = data.select_dtypes(exclude='object').columns
         
         from sklearn.impute import SimpleImputer
+        import numpy as np
         s2 = SimpleImputer(
             missing_values=np.nan,  # los valores que faltan son del tipo ``np.nan`` (Pandas estándar)
             strategy='median',  # la estrategia elegida es cambiar el valor faltante por una constante
